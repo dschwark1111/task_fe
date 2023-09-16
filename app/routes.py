@@ -22,7 +22,7 @@ def about_me():
     }
     return render_template("about.html", user=me)
 
-@app.route("/tasks")
+@app.get("/tasks")
 def task_list():
     response = requests.get(BACKEND_URL)
     if response.status_code == 200:
@@ -56,3 +56,29 @@ def edit_task_req(pk):
         response.status_code
     )
 
+@app.post("/tasks/add")
+def new_task():
+    url = "%s/%s" % (BACKEND_URL)
+    new_task =request.form
+    task_data={
+        "summary":new_task.get("summary"),
+        "description":new_task.get("description")
+    }
+    response = requests.put(url, json=task_data)
+    if response.status_code ==204:
+        return render_template("success.html")
+    return(
+        render_template("error.html", response.status_code),
+        response.status_code
+    )
+@app.get("/tasks/add")
+def new_task_form():
+    #url = "%s/%s" % (BACKEND_URL)
+    #response = requests.get(url)
+    #form = create_task()
+    #if response.status_code ==204:
+    return render_template("create.html")
+    # return(
+    #     render_template("error.html", response.status_code),
+    #     response.status_code
+    # )

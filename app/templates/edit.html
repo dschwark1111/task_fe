@@ -7,11 +7,11 @@
 <form method="POST" action="{{url_for('edit_task_req', pk=task['id']) }}">
     <p>
         <label for="summary"> Summary: </label>
-        <input type="text" value="{{task ['summary']}}" name="summary" id="id_summary">
+        <input type="text" value="{{task['summary']}}" name="summary" id="id_summary">
     </p>
     <p>
         <label for="description"> Description: </label>
-        <input type="text" value="{{task ['description']}}" name="description" id="id_description">
+        <input type="text" value="{{task['description']}}" name="description" id="id_description">
     </p>
     <input type="hidden" value="{{task['is_active']}}"> 
     <input type="submit" value="Edit" class="btn btn-success">
